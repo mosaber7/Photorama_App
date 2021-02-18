@@ -16,6 +16,9 @@
 		0566858025DC438A004BCDDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0566857F25DC438A004BCDDD /* Assets.xcassets */; };
 		0566858325DC438A004BCDDD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0566858125DC438A004BCDDD /* LaunchScreen.storyboard */; };
 		0566858D25DC475D004BCDDD /* flickerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0566858C25DC475D004BCDDD /* flickerAPI.swift */; };
+		056DD8D325DF151400A04240 /* PhotoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056DD8D225DF151400A04240 /* PhotoDataSource.swift */; };
+		056DD8D625DF1AF900A04240 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056DD8D525DF1AF900A04240 /* PhotoCollectionViewCell.swift */; };
+		056DD8D925DF224C00A04240 /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056DD8D825DF224C00A04240 /* ImageStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +33,9 @@
 		0566858225DC438A004BCDDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0566858425DC438A004BCDDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0566858C25DC475D004BCDDD /* flickerAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flickerAPI.swift; sourceTree = "<group>"; };
+		056DD8D225DF151400A04240 /* PhotoDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDataSource.swift; sourceTree = "<group>"; };
+		056DD8D525DF1AF900A04240 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		056DD8D825DF224C00A04240 /* ImageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +78,9 @@
 				0566858C25DC475D004BCDDD /* flickerAPI.swift */,
 				052F56EA25DC78AF0049EE80 /* PhotoSource.swift */,
 				052F56ED25DC7F880049EE80 /* Photo.swift */,
+				056DD8D225DF151400A04240 /* PhotoDataSource.swift */,
+				056DD8D525DF1AF900A04240 /* PhotoCollectionViewCell.swift */,
+				056DD8D825DF224C00A04240 /* ImageStore.swift */,
 			);
 			path = Photrama;
 			sourceTree = "<group>";
@@ -147,8 +156,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0566857B25DC438A004BCDDD /* PhotosViewController.swift in Sources */,
+				056DD8D625DF1AF900A04240 /* PhotoCollectionViewCell.swift in Sources */,
+				056DD8D325DF151400A04240 /* PhotoDataSource.swift in Sources */,
 				0566858D25DC475D004BCDDD /* flickerAPI.swift in Sources */,
 				0566857725DC438A004BCDDD /* AppDelegate.swift in Sources */,
+				056DD8D925DF224C00A04240 /* ImageStore.swift in Sources */,
 				052F56EB25DC78AF0049EE80 /* PhotoSource.swift in Sources */,
 				052F56EE25DC7F880049EE80 /* Photo.swift in Sources */,
 				0566857925DC438A004BCDDD /* SceneDelegate.swift in Sources */,
