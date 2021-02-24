@@ -6,14 +6,27 @@
 //
 
 import UIKit
+import CoreData
 
 enum PhotoError:Error {
     case imageCreationError
     case missingImageURL
 }
 
-class PhotSource{
+class PhotStore{
     let imageStore = ImageStore()
+    
+    let persistentContainer: NSPersistentContainer = {
+        
+        let container = NSPersistentContainer(name: "Photrama")
+        container.loadPersistentStores { (description, error) in
+            if let error = error{
+                print("Error setting up coreData: \(error)")
+            }
+            
+        }
+        return container
+    }()
     
     
     private let session: URLSession = {
@@ -27,24 +40,53 @@ class PhotSource{
         let request = URLRequest(url: url)
         session.dataTask(with: request) { (data, url, erroe) in
             
-            let result = self.processPhotoRequest(data: data, error: erroe)
+           var result = self.processPhotoRequest(data: data, error: erroe)
+            if case .success = result{
+                do{
+                    try
+                        self.persistentContainer.viewContext.save()
+                }catch{
+                    result = .failure(error)
+                }
+            }
             OperationQueue.main.addOperation {
                 completion(result)
-
+                
             }
         }.resume()
-     
+        
     }
     
     private func processPhotoRequest(data: Data?, error: Error?) -> Result<[Photo], Error>{
         guard let jsonData = data else {
             return .failure(error!)
         }
-        return FlickrApI.photos(fronJson: jsonData)
+        let context = persistentContainer.viewContext
+        switch FlickrApI.photos(fronJson: jsonData) {
+            case let .success(flickrPhoto):
+                let photos = flickrPhoto.map{
+                    flickrPhoto -> Photo in
+                    var photo: Photo!
+                    context.performAndWait {
+                        photo = Photo(context: context)
+                        photo.title = flickrPhoto.title
+                        photo.photoID = flickrPhoto.photoID
+                        photo.remoteURL = flickrPhoto.remoteURL
+                        photo.dateTaken = flickrPhoto.dateTaken
+                        
+                    }
+                    return photo
+                }
+                return .success(photos)
+            case let .failure(error):
+                return .failure(error)
+            }
     }
     func fetchImage(for photo: Photo, completion: @escaping(Result<UIImage, Error>)->Void){
         
-        let photoKey = photo.photoID
+        guard let photoKey = photo.photoID else{
+            preconditionFailure("phot expected to have a photoID")
+        }
         
         if let image = imageStore.image(forKey: photoKey){
             OperationQueue.main.addOperation {
@@ -64,7 +106,7 @@ class PhotSource{
             }
             OperationQueue.main.addOperation {
                 completion(result)
-
+                
             }
         }.resume()
         
